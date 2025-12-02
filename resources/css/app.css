@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-lightBone: #E8D9D0;
+    --color-darkBone: #C4A484;
+    --color-creme:#F1E6D9;
+    --color-darkA: #4C4C4C;
+    --color-choco: #31211B;
+    --color-signInbg: #F4E3D8;
+    --color-transparentt: #AFA49E;
+    --color-inputBox: #9C755E;
+    --font-libreBodoni: 'Libre Bodoni', serif;
+    --font-albertSans: 'Albert Sans', sans-serif;
+    --font-dmSerifText: 'DM Serif Text', serif;
+    --font-ebGaramond: 'EB Garamond', serif;
+}
