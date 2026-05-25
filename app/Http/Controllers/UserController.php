@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Products;
+use App\Models\Order;
+use App\Models\Tasklist;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Log;
 
@@ -41,6 +43,7 @@ class UserController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:5',
         ]);
+        
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -56,6 +59,7 @@ class UserController extends Controller
             $name = $request->input('name');
             $email = $request->input('email');
             $password = $request->input('password');
+            $passwordConfirm = $request->input('password_confirmation');
 
             // Jika username sudah dipakai
             if (User::where('name', $name)->exists()) {
@@ -85,13 +89,26 @@ class UserController extends Controller
         }
 
         public function goDashboard()
-    {
+    
+        {
+        $finishedOrders = Order::whereRaw("TRIM(status) = 'finished'")->get();
+        $progressedOrders = Order::whereRaw("TRIM(status) = 'progress'")
+        ->with(['tasklists' => function ($query) {
+            $query->where('is_done', false);
+        }])
+        // ->whereHas('tasklists', function ($query) {
+        //     $query->where('is_done', false)->latest('created_at');
+        // })
+        ->get();
+        $products = Products::All();
+        Order::whereRaw("TRIM(status) = 'finished'")->update([
+            'finished_at' => now()
+        ]);
 
-        $products = Products::all();
 
         if(Auth::check() && Auth::user()->usertype == 'admin')
         {
-        return view('admin.dashboard');
+        return view('admin.dashboard', compact('finishedOrders', 'progressedOrders'));
         }
         else
         {
@@ -142,16 +159,6 @@ class UserController extends Controller
                 return redirect()->route('profile')->with('success', 'Profile updated successfully!');
         }
 
-            public function finished()
-        {
-            return view('user.finished');
-        }
-
-            public function progress()
-        {
-            return view('user.progress');
-        }
-
         public function deleteAccount($id)
         {
             $user = User::findOrFail($id);
@@ -159,6 +166,41 @@ class UserController extends Controller
 
             return redirect()->route('dashboard')->with('success', 'User deleted successfully!');
         }
+        public function detailProgress($id)
+        {
+            $user = Auth::user();
+            //order buat munculin semua tasklist yang belum maupun udah done, buat nampilin di details progress
+            $order = $user
+                ->orders()
+                ->whereRaw("TRIM(status) = 'progress'")
+                ->with('tasklists')
+                ->findOrFail($id);
 
+            //tasklist buat munculin tasklist yang belum done aja, buat nampilin di details progress
+            $tasklists = $order->tasklists()
+                ->where('is_done', false)
+                ->oldest('id')
+                ->get();
+
+            return view('user.details-progress', compact('order', 'user', 'tasklists'));
+        }
+
+        public function detailsFinished($id){
+            $user = Auth::user();
+            //order buat munculin semua tasklist yang belum maupun udah done, buat nampilin di details progress
+            $order = $user
+                ->orders()
+                ->whereRaw("TRIM(status) = 'finished'")
+                ->with('tasklists')
+                ->findOrFail($id);
+
+            //tasklist buat munculin tasklist yang belum done aja, buat nampilin di details progress
+            $tasklists = $order->tasklists()
+                ->where('is_done', false)
+                ->oldest('id')
+                ->get();
+
+            return view('user.detail-finished', compact('order', 'user', 'tasklists'));
+        }
 
 }

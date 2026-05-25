@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('users', function (Blueprint $table) {
-        //     $table->string('usertype')->default('user');
+        // Schema::table('tasklists', function (Blueprint $table) {
+        //     $table->foreignId('order_id')
+        //     ->constrained()
+        //     ->onDelete('cascade')
+        //     ->change();
         // });
     }
 
@@ -21,8 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('users', function (Blueprint $table) {
-        //     $table->dropColumn('usertype');
+        // Schema::table('tasklists', function (Blueprint $table) {
+        //     $table->dropForeign(['order_id'])->change();
         // });
     }
 };

@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::table('users', function (Blueprint $table) {
-        //     $table->string('usertype')->default('user');
-        // });
+        Schema::table('order', function( Blueprint $table){
+            $table->timestamp('finished_at')->nullable();
+        });
     }
 
     /**
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::table('users', function (Blueprint $table) {
-        //     $table->dropColumn('usertype');
-        // });
+         Schema::table('order', function( Blueprint $table){
+            $table->dropColumn('finished_at');
+        });
     }
 };

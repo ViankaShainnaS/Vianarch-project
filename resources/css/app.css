@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -24,4 +25,8 @@
     --font-albertSans: 'Albert Sans', sans-serif;
     --font-dmSerifText: 'DM Serif Text', serif;
     --font-ebGaramond: 'EB Garamond', serif;
+    --font-dmSerifDisplay: 'DM Serif Text', serif;
+}
+html{
+    scroll-behavior: smooth;
 }

@@ -19,84 +19,85 @@
             </style>
         @endif
     </head>
-    <body >
+    <body class="w-fit">
     <!--Navbar-->
-    <nav class="px-15 py-3 md:flex md:items-center md:justify-evenly md:gap-100 bg-white">
+    <nav id="navbar" class="px-15 py-3 md:flex md:items-center md:justify-center md:gap-80 bg-white">
         <a href="#" id="brand" class="flex gap-2 items-center">
             <img src="{{ asset('assets/logo-beneran-contoh.svg') }}" alt="Logo" class="h-[36px] object-cover ">
-            <span class="font-libreBodoni italic text-dark text-[20px]">logo</span>
+            <span class="font-libreBodoni italic text-dark text-[20px]">Vianarch</span>
         </a>
         <button class="md:hidden py-5 cursor-pointer transition delay-150 duration-300 ease-in-out" id="menu-button" aria-label="Toggle Menu" onclick="document.getElementById('menu').classList.toggle('hidden');">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 21 21"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M4.5 6.5h12m-12.002 4h11.997M4.5 14.5h11.995" stroke-width="1"/></svg>
         </button>
-        <ul class=" hidden font-albertSans flex-col md:gap-[55px] md:flex p-5 md:w-auto md:flex-row md:items-center bg-choco md:bg-transparent rounded-md" id="menu">
-            <li><a href="#home" class="text-creme md:text-darkA text-[15px]">Home</a></li>
-            <li><a href="#product" class="text-creme md:text-darkA text-[15px] md:hover:text-black ac">Product</a></li>
-            <li><a href="#3dView" class="text-creme md:text-darkA text-[15px] md:hover:text-black active:md:text-black">About Us</a></li>
-            <li><a href="#order" class="text-creme md:text-darkA text-[15px] md:hover:text-black active:md:text-black">3D View</a></li>
+        <div class="hidden font-albertSans flex-col md:gap-50 md:flex p-5 md:justify-arround md:w-fit md:flex-row md:items-center bg-choco md:bg-transparent rounded-md" id="menu">
+            <ul class="md:flex md:gap-[55px] flex flex-col md:flex-row md:items-center">
+                <li><a href="#navbar" class="text-creme md:text-darkA text-[15px]">Home</a></li>
+                <li><a href="#product" class="text-creme md:text-darkA text-[15px] md:hover:text-black">Product</a></li>
+                <li><a href="{{ route('user.order') }}" class="text-creme md:text-darkA text-[15px] md:hover:text-black active:md:text-black">Order</a></li>
+                <li><a href="#about" class="text-creme md:text-darkA text-[15px] md:hover:text-black">3D View</a></li>
+            </ul>
 
+            <div class="md:flex md:gap-4 flex flex-col md:flex-row md:ml-[-15px]">
+            <!--Jika blm login-->
+            @guest
+                <button onclick="window.location='{{ route('login') }}'" class="md:bg-transparentt
+                outline-2 md:outline-black outline-lightBone outline-solid  px-30 py-2 md:px-8 md:py-2 rounded-md text-[15px] my-4 mx-2 md:my-0
+                hover:bg-lightBone hover:outline-0 text-lightBone hover:text-choco transition-all duration-300 ease-in delay-75
+                bg-transparent md:text-black md:hover:bg-choco md:hover:text-creme cursor-pointer">
+                    Sign In
+                </button>
 
-        <div class="md:flex md:gap-4 flex flex-col md:flex-row md:ml-60">
-        <!--Jika blm login-->
-        @guest
-            <button onclick="window.location='{{ route('login') }}'" class="md:bg-transparentt
-            outline-2 md:outline-black outline-lightBone outline-solid  px-30 py-2 md:px-8 md:py-2 rounded-md text-[15px] my-4 mx-2 md:my-0
-             hover:bg-lightBone hover:outline-0 text-lightBone hover:text-choco transition-all duration-300 ease-in delay-75
-             bg-transparent md:text-black md:hover:bg-choco md:hover:text-creme cursor-pointer">
-                Sign In
-            </button>
-
-            <button href=# class="md:bg-choco outline-0 md:outline-black outline-lightBone outline-solid  flex justify-center px-28 py-2 md:px-8 md:py-2 mx-2 md:mx-0 rounded-md text-[15px] my-4 md:my-0
-             hover:bg-choco  text-choco hover:outline-2 hover:text-lightBone transition-all duration-300 ease-in delay-75
-             bg-lightBone md:text-lightBone md:hover:bg-creme md:hover:text-choco">
-                Contact us
-            </button>
-        @endguest
-        <!--Jika sudah login-->
-        @auth
-        <button href=# class="md:bg-choco outline-0 md:outline-black outline-lightBone outline-solid items-center flex justify-center px-28 py-2 md:px-6 md:ml-[-15px] md:py-2 mx-2 md:mx-0 rounded-md text-[15px] my-4 md:my-0
-             hover:bg-choco  text-choco hover:outline-2 hover:text-lightBone transition-all duration-300 ease-in delay-75
-             bg-lightBone md:text-lightBone md:hover:bg-creme md:hover:text-choco">
-                Contact us
-            </button>
-            <a href={{ route('profile') }} class="md:flex md:flex-col justify-center hidden">
-                <img src="{{ asset('assets/profile-svg.svg') }}" alt="user-icon" class="md:h-[45px] md:object-cover md:ml-0 md:px-5">
-            </a>
-            <button href=# class="md:hidden md:bg-choco outline-0 md:outline-black outline-lightBone outline-solid  flex justify-center px-28 py-2 md:px-6 md:ml-[-15px] md:py-2 mx-2 md:mx-0 rounded-md text-[15px] my-2 md:my-0
-             hover:bg-choco  text-choco hover:outline-2 hover:text-lightBone transition-all duration-300 ease-in delay-75
-             bg-lightBone md:text-lightBone md:hover:bg-creme md:hover:text-choco">
-                Edit profile
-            </button>
-        @endauth
+                <a href={{ route('contact') }} class="md:bg-choco outline-0 md:outline-black outline-lightBone outline-solid  flex justify-center px-28 py-2 md:px-8 md:py-2 mx-2 md:mx-0 rounded-md text-[15px] my-4 md:my-0
+                hover:bg-choco  text-choco hover:outline-2 hover:text-lightBone transition-all duration-300 ease-in delay-75
+                bg-lightBone md:text-lightBone md:hover:bg-creme md:hover:text-choco">
+                    Contact us
+                </a>
+            @endguest
+            <!--Jika sudah login-->
+            @auth
+            <a href={{ route('contact') }} class="md:bg-choco outline-0 md:outline-black outline-lightBone outline-solid items-center flex justify-center px-28 py-2 md:px-6 md:ml-[-15px] md:py-2 mx-2 md:mx-0 rounded-md text-[15px] my-4 md:my-0
+                hover:bg-choco  text-choco hover:outline-2 hover:text-lightBone transition-all duration-300 ease-in delay-75
+                bg-lightBone md:text-lightBone md:hover:bg-creme md:hover:text-choco">
+                    Contact us
+                </a>
+                <a href={{ route('profile') }} class="md:flex md:flex-col justify-center hidden">
+                    <img src="{{ asset('assets/profile-svg.svg') }}" alt="user-icon" class="md:h-[45px] md:object-cover md:ml-0 md:px-5">
+                </a>
+                <button href=# class="md:hidden md:bg-choco outline-0 md:outline-black outline-lightBone outline-solid  flex justify-center px-28 py-2 md:px-6 md:ml-[-15px] md:py-2 mx-2 md:mx-0 rounded-md text-[15px] my-2 md:my-0
+                hover:bg-choco  text-choco hover:outline-2 hover:text-lightBone transition-all duration-300 ease-in delay-75
+                bg-lightBone md:text-lightBone md:hover:bg-creme md:hover:text-choco">
+                    Edit profile
+                </button>
+            @endauth
+            </div>
         </div>
-        </ul>
 
     </nav>
     <!--Main page-->
-    <main class="snap-y- snap-mandatory scroll-smooth h-screen">
+    <main class="snap-y snap-mandatory scroll-smooth h-screen duration-300">
         <div class="px-10 lg:px-30 md:py-25 py-5 flex md:flex-row flex-col gap-15 md:justify-between bg-gradient-to-b from-white to-[#E9C4AF] snap-start snap-normal" id="home">
          <!--Search Bar-->
          <div class="flex flex-col gap-10 md:gap-15 w-full md:w-[600px]">
-        <div class=" relative outline-2 outline-solid outline-choco bg-choco/30 w-full md:w-[600px] md:h-[45px] h-[45px] rounded-[50px] shadow-xl  shadow-choco/100 ">
+        {{-- <div class=" relative outline-2 outline-solid outline-choco bg-choco/30 w-full md:w-[600px] md:h-[45px] h-[45px] rounded-[50px] shadow-xl  shadow-choco/100 ">
             <input type="text" placeholder="Search..." class="bg-transparent w-full h-full rounded-[50px] px-10 text-lightBone placeholder:text-lightBone outline-none">
             <button class="absolute right-0 top-0 rounded-[50px] bg-choco w-[75px] h-[45px] flex justify-center items-center md:ml-[528px] outline-choco outline-0 outline-solid transition-all duration-300 ease-in delay-75 cursor-pointer">
                 <img src="{{ asset('assets/search-icon.svg') }}" alt="search" class="h-[30px] object-cover ">
             </button>
-        </div>
+        </div> --}}
          <!--Title and Description-->
-        <div class="flex md:max-w-[650px] flex-col  md:text-left text-center">
+        <div class="flex md:max-w-[650px] flex-col md:text-left text-center snap-center mt-10">
             <h1 class="font-dmSerifText text-black text-[80px] items-center md:items-start md:text-[110px] leading-[1.2]">Build Design</h1>
             <h3 class="font-ebGaramond text-darkA text-[50px] md:text-[55px] md:mt-[-15px]">Into <span class="italic">Reality</span></h3>
             <p class="font-albertSans text-black text-[18px] md:text-[20px] leading-[1.6] mt-15">We provide high quality 3D design services that bring your ideas to life. Our team of experts is dedicated to delivering exceptional results
         </div>
             <!--Call to Action Buttons-->
             <div class="flex md:justify-start justify-center md:mt-[-30px] flex-row">
-                <button class="bg-choco text-lightBone rounded-lg text-[17px] h-max hover:bg-darkA transition-all duration-300 ease-in delay-75 justify-center items-center flex">
+                <a href="#product" class="bg-choco text-lightBone rounded-lg text-[17px] h-max hover:bg-darkA transition-all duration-300 ease-in delay-75 justify-center items-center flex">
                     <span class="pl-5 py-3">Learn More</span>
                     {{-- <div class="inline-flex ml-5 h-12 w-1 bg-[#979797]">
                     </div> --}}
                     <img src="{{ asset('assets/panah-kanan.svg') }}" alt="arrow-right" class="h-[30px] object-cover px-2">
-                </button>
+                </a>
             </div>
         </div>
         <!--Hero Image-->
@@ -111,7 +112,7 @@
         <div class="w-screen h-fit flex md:flex-row flex-col justify-center gap-5 px-10 mt-5">
             <h1 class="text-[#FFDBC5] font-dmSerifText italic md:text-[80px] text-[60px] md:ml-10">EVERYTIME</h1>
             <h3 class="text-[#D5C3C1] font-ebGaramond md:text-[60px] text-[40px] md:mt-5 md:ml-5 mt-[-85px] ml-80">with</h3>
-            <h1 class="text-[#FFDBC5] font-dmSerifText italic md:text-[80px] text-[60px]  underline md:mt-20 md:ml-[-100px] mt-[-40px]">HILARIOUS</h1>
+            <h1 class="text-[#FFDBC5] font-dmSerifText italic md:text-[80px] text-[60px]  underline md:mt-20 md:ml-[-100px] mt-[-40px]">AWSOME</h1>
             <h3 class="text-[#D5C3C1] font-ebGaramond md:text-[60px] text-[40px] italic md:mt-25 md:ml-5 mt-[-85px] ml-78">design</h3>
         </div>
         <!--Product Image-->
@@ -120,7 +121,7 @@
                 @forelse($products as $product)
             <!-- Card 1 -->
                 <div class="relative overflow-hidden rounded-t-[150px] bg-black shadow-lg">
-                    <img src={{ asset('storage/'. $product->imageLink )}} alt="Arch visualization" class="w-full h-[400px] object-cover opacity-80 hover:scale-105 transition-transform duration-300">
+                    <img src={{ asset('storage/'. $product->imageLink )}} alt="Arch visualization" class="w-full h-[400px] object-cover opacity-80 hover:scale-105 transition-all duration-300">
                     <div class="absolute bottom-5 left-0 right-0 text-center px-5 hover:-translate-y-2 transition-transform duration-300">
                         <h3 class="text-xl font-semibold text-white">{{ $product->name }}</h3>
                         <p class="text-gray-300 text-sm">{{ $product->description }}</p>
@@ -131,8 +132,10 @@
         </div>
         <!--Call to Action Buttons-->
         <div class="flex md:flex-row flex-col">
-        <div class="flex md:justify-start justify-center items-center text-left  md:mt-[-30px] px-10 mb-10 md:ml-50 max-w-fit">
-             <p class="md:max-w-100 max-w-200 text-white font-albertSans text-[18px]">Lorem ipsum dolor sit amet,consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <div class="flex md:justify-start justify-center items-center text-left md:mt-[-30px] px-10 mb-10 md:ml-50 max-w-fit">
+             <p class="md:max-w-110 max-w-200 text-white font-albertSans text-[18px]">
+                Explore our portfolio of stunning 3D designs, showcasing our expertise in architectural visualization, product rendering, and interior design.
+             </p>
         </div>
         <div class="flex justify-center md:mt-[-25px] mb-10 md:mb-0 flex-row md:ml-140">
             <button onclick="location.href='{{ route('user.order') }}'" class="bg-[#E8D9D0] text-choco rounded-lg text-[17px] h-max hover:bg-[#D5C3C1] transition-all duration-300 ease-in delay-75 justify-center items-center flex">
@@ -171,6 +174,146 @@
                     Has 3 good teamworks
                 </p>
             </div>
-        </main>
-    </body>
+        </div>
+    </div>
+    {{-- 3D View --}}
+    <div class="flex bg-[#3b2c2c] h-[680px] justify-around items-center" id="3d-view">
+        <div class="flex flex-col ml-10">
+            <h1 class="font-dmSerifText leading-1.5 italic text-[#ffffff] text-[70px]">3D View Modelling</h1>
+            <p class="text-[#F1E6D9] font-albertSans text-[18px] italic opacity-80 max-w-[400px] mt-13">
+                Discover our 3D modeling capabilities and bring your ideas to life with stunning visualizations. Experience the power of 3D modeling and see your concepts come to life in a whole new dimension.
+            </p>
+        </div>
+        <div class="flex flex-col items-center justify-center w-[800px] h-[450px] hover:h-[480px] hover:w-[820px] bg-amber-300  transition-all duration-300 ease-in-out">
+            <div class="sketchfab-embed-wrapper w-full h-full"> <iframe title="classroom2" class="w-full h-full" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/55522d90c65c4f1ab3dd71fc06398556/embed"> </iframe></div>
+        </div>
+    </div>
+    {{-- Experience --}}
+    <div class="bg-lightBone h-full items-center flex justify-center gap-10" id="experience">
+        <div class="">
+            <img src="{{ asset ('assets/hero.jpg') }}" class="w-[650px]">
+        </div>
+        <div class="pl-15">
+            <div class="mt-[-40px]">
+                <h3 class="font-dmSerifDisplay text-[#31211B] text-[70px]">Proven by</h3>
+                <h1 class="font-dmSerifDisplay text-[#31211B]/50 text-[80px] mt-[-35px] underline underline-offset-[7%] decoration-[#31211B]/50 decoration-3">EXPERIENCE</h1>
+            </div>
+            <div class="flex-col">
+                <div class="mt-10 flex">
+                    <div class="w-[65px] h-[50px] bg-[#D3C7BF] rounded-[8px] flex justify-center items-center">
+                        <span class="font-ebGaramond font-bold text-[25px]">01</span>
+                    </div>
+                    <div class="ml-5">
+                        <h4 class="font-albertSans font-bold text-[25px] text-black">Precision in Every Detail</h4>
+                        <p class="font-albertSans text-[20px] text-black">Each project is crafted with architectural<br> accuracy and visual clarity, 
+                            ensuring every <br> element reflects real-world proportions and design intent.</p>
+                    </div>
+                </div>
+                <div class="mt-10 flex">
+                    <div class="w-[65px] h-[50px] bg-[#D3C7BF] rounded-[8px] flex justify-center items-center">
+                        <span class="font-ebGaramond font-bold text-[25px]">02</span>
+                    </div>
+                    <div class="ml-5">
+                        <h4 class="font-albertSans font-bold text-[25px] text-black">Seamless Collaboration</h4>
+                        <p class="font-albertSans text-[20px] text-black">We work closely with clients to understand<br>their vision, transforming concepts into 
+                            <br>realistic renders that communicate ideas effortlessly.</p>
+                    </div>
+                </div>
+                <div class="mt-10 flex">
+                    <div class="w-[65px] h-[50px] bg-[#D3C7BF] rounded-[8px] flex justify-center items-center">
+                        <span class="font-ebGaramond font-bold text-[25px]">03</span>
+                    </div>
+                    <div class="ml-5">
+                        <h4 class="font-albertSans font-bold text-[25px] text-black">Proven Results</h4>
+                        <p class="font-albertSans text-[20px] text-black">Backed by years of experience, our designs<br>have helped clients bring offices, homes, 
+                            and public <br> buildings to life with confidence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Gallery --}}
+    <div id="gallery" class="h-full grid grid-cols-3 grid-rows-2" id="gallery">
+        <div class="bg-black relative overflow-hidden">
+            <div class="z-10  mt-50 ml-50 absolute hover:scale-90 transition-transform duration-300 hover:cursor-default">
+                <h3 class="text-[20px] font-albertSans  text-white">Exterior Design</h3>
+            </div>
+            <img src="{{ asset ('assets/gallery-1.jpg') }}" class="w-full h-full object-cover opacity-60 hover:opacity-50 duration-300">
+        </div>
+        <div class="bg-black relative overflow-hidden">
+            <div class="z-10  mt-50 ml-50 absolute hover:scale-90 transition-transform duration-300 hover:cursor-default">
+                 <h3 class="text-[20px] font-albertSans  text-white">Interior Design</h3>
+            </div>
+            <img src="{{ asset ('assets/gallery-2.jpg') }}" class="w-full h-full object-cover opacity-60 hover:opacity-50 duration-300">
+        </div>
+        <div class="bg-black relative overflow-hidden">
+            <div class="z-10  mt-50 ml-50 absolute hover:scale-90 transition-transform duration-300 hover:cursor-default">
+                 <h3 class="text-[20px] font-albertSans  text-white">Exterior Design</h3>
+            </div>
+            <img src="{{ asset ('assets/gallery-3.jpg') }}" class="w-full h-full object-cover opacity-60 hover:opacity-50 duration-300">
+        </div>
+        <div class="bg-black relative overflow-hidden">
+            <div class="z-10  mt-50 ml-50 absolute hover:scale-90 transition-transform duration-300 hover:cursor-default">
+                <h3 class="text-[20px] font-albertSans  text-white">Interior Design</h3>
+            </div>
+            <img src="{{ asset ('assets/gallery-4.jpg') }}" class="w-full h-full object-cover opacity-60 hover:opacity-50 duration-300">
+        </div>
+        <div class="bg-black relative overflow-hidden">
+            <div class="z-10  mt-50 ml-50 absolute hover:scale-90 transition-transform duration-300 hover:cursor-default">
+                 <h3 class="text-[20px] font-albertSans  text-white">Exterior Design</h3>
+            </div>
+            <img src="{{ asset ('assets/gallery-5.jpg') }}" class="w-full h-full object-cover opacity-60 hover:opacity-50 duration-300">
+        </div>
+        <div class="bg-black relative overflow-hidden">
+           <div class="z-10  mt-50 ml-50 absolute hover:scale-90 transition-transform duration-300 hover:cursor-default">
+                 <h3 class="text-[20px] font-albertSans text-white">Interior Design</h3>
+            </div>
+            <img src="{{ asset ('assets/gallery-6.jpg') }}" class="w-full h-full object-cover opacity-60 hover:opacity-50 duration-300">
+        </div>
+    </div>
+    {{-- Footer --}}
+    <footer class="w-screen h-[261px] bg-[#54382E] flex flex-col">
+            <div class="flex flex-col ml-27">
+                <div class="flex justify-between mt-10">
+                    <div class="flex">
+                        <img src="{{ asset('assets/logo-beneran-contoh.svg') }}" class="w-[34px] h-[34px] ">
+                        <h3 class="font-libreBodoni text-[30px] italic text-[#D6D6D6] mt-[-3px] ml-3">Vianarch</h3>
+                    </div>
+                    <div class="flex gap-10 mr-27 mt-5 font-albertSans text[20px] text-[#D6D6D6]">
+                        <a href="#navbar">HOME</a>
+                        <a href="#aboutUs">ABOUT US</a>
+                        <a href="#gallery">GALLERY</a>
+                        <a href="{{ route('contact') }}">CONTACT</a>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-5">
+                    <p class="font-albertSans text-[15px] text-[#D6D6D6]">Lorem ipsum dLorem ipsum dolor sit amet, consectetur adipiscing 
+                        <br>elit. Fusce et metus ultrices, 
+                        gravida leo et, </p>
+                    <div class="flex gap-10 mr-27 font-albertSans text[20px] text-[#D6D6D6]">
+                        <a href="{{ route('user.order') }}">ORDER</a>
+                        <a href="{{ route('profile') }}">PROFILE</a>
+                    </div>
+                </div>
+                <div class="bg-[#D6D6D6] w-80% h-[0.5px] mt-10 mr-27"></div>
+                <div class="flex justify-between">
+                    <div class="flex mt-3 gap-5">
+                        <a href="https://facebook.com">
+                            <img src="{{ asset ('assets/facebook.svg') }}">
+                        </a>
+                        <a href="https://whatsapp.com">
+                            <img src="{{ asset ('assets/whatsapp.svg') }}">
+                        </a>
+                        <a href="https://instagram.com">
+                            <img src="{{ asset ('assets/instagram.svg') }}">
+                        </a>
+                    </div>
+                    <div class="font-albertSans text-[12px] text-[#D6D6D6] opacity-65 mr-27 mt-3">
+                        <p>© 2025 Dreamy Inc. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+    </footer>
+</main>
+</body>
 </html>

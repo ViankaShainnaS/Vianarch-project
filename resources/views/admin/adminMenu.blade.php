@@ -12,7 +12,7 @@
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @endif
 </head>
-<body class="bg-gradient-to-b from-[#FFF1E0] from-60% to-[#4B2C2C] to-99% min-h-screen flex justify-center gap-8 ml-32 items-center">
+<body class="bg-gradient-to-b from-[#FFF1E0] from-60% to-[#4B2C2C] to-99% h-screen flex justify-center gap-8 ml-32 items-start">
 
     <!-- Sidebar Navigation -->
     <nav class="w-[346px] p-8 h-[828px]">
@@ -47,7 +47,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="flex-1 p-8">
+    <main class="flex-1 p-8 flex flex-col min-h-0">
         @yield('content')
     </main>
 

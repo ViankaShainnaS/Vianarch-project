@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Products;
+use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Log;
@@ -22,14 +23,23 @@ class AdminController extends Controller{
         $this->middleware([ 'admin', 'prevent-back' ]);
     }
 
-    public function onProgress(){
-        //logic for manage onProgress section
+    public function onProgress($id){
+        $orders = Order::whereRaw("TRIM(status) = 'progress'")->with('tasklists')->findOrFail($id);
 
+        return view('admin.details-progress', compact('orders'));
+    }
+    public function finishButton($id){
+        $order = Order::findOrFail($id);
+        $order->status = 'finished';
+        $order->save();
+
+        return redirect()->route('admin.dashboard')->with('success', 'Order marked as finished!');
     }
 
-    public function finished(){
-        //logic for manage finished section
+    public function finished($id){
+        $order = Order::whereRaw("TRIM(status) = 'finished'")->with('tasklists')->findOrFail($id);
 
+        return view('admin.details-finish', compact('order'));
     }
 
     public function showProducts(){
@@ -47,8 +57,6 @@ class AdminController extends Controller{
            return view('admin.productsCreate');
 
     }
-
-    // Pastikan kamu menggunakan use Illuminate\Support\Facades\Storage;
 
 public function updateProduct(Request $request, $id)
 {
