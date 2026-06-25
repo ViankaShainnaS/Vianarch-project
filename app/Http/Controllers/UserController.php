@@ -91,29 +91,31 @@ class UserController extends Controller
         public function goDashboard()
     
         {
-        $finishedOrders = Order::whereRaw("TRIM(status) = 'finished'")->get();
-        $progressedOrders = Order::whereRaw("TRIM(status) = 'progress'")
-        ->with(['tasklists' => function ($query) {
-            $query->where('is_done', false);
-        }])
-        // ->whereHas('tasklists', function ($query) {
-        //     $query->where('is_done', false)->latest('created_at');
-        // })
-        ->get();
-        $products = Products::All();
-        Order::whereRaw("TRIM(status) = 'finished'")->update([
-            'finished_at' => now()
-        ]);
+        // $finishedOrders = Order::whereRaw("TRIM(status) = 'finished'")->get();
+        // $progressedOrders = Order::whereRaw("TRIM(status) = 'progress'")
+        // ->with(['tasklists' => function ($query) {
+        //     $query->where('is_done', false);
+        // }])
+        // // ->whereHas('tasklists', function ($query) {
+        // //     $query->where('is_done', false)->latest('created_at');
+        // // })
+        // ->get();
+        // $products = Products::All();
+        // Order::whereRaw("TRIM(status) = 'finished'")->update([
+        //     'finished_at' => now()
+        // ]);
 
 
-        if(Auth::check() && Auth::user()->usertype == 'admin')
-        {
-        return view('admin.dashboard', compact('finishedOrders', 'progressedOrders'));
-        }
-        else
-        {
-            return view('welcome', compact('products'));
-        }
+        // if(Auth::check() && Auth::user()->usertype == 'admin')
+        // {
+        // return view('admin.dashboard', compact('finishedOrders', 'progressedOrders'));
+        // }
+        // else
+        // {
+        //     return view('welcome', compact('products'));
+        // }
+
+        return 'Controller berhasil';
     }
 
             public function showProfile()
