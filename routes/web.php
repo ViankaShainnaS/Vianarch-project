@@ -12,7 +12,10 @@ Route::get('/signup', [UserController::class, 'registration'])->name('register')
 
 Route::post('login', [UserController::class, 'logincheck'])->name('logincheck');
 Route::post('signup', [UserController::class, 'registerCheck'])->name('registercheck');
-Route::get('/',[UserController::class, 'goDashboard'])->name('dashboard');
+Route::get('/', function () {
+    dd('Laravel Railway berhasil!');
+});
+// [UserController::class, 'goDashboard'])->name('dashboard')
 Route::get('/test', function () {
     return 'Laravel Railway berhasil!';
 });
