@@ -13,6 +13,9 @@ Route::get('/signup', [UserController::class, 'registration'])->name('register')
 Route::post('login', [UserController::class, 'logincheck'])->name('logincheck');
 Route::post('signup', [UserController::class, 'registerCheck'])->name('registercheck');
 Route::get('/',[UserController::class, 'goDashboard'])->name('dashboard');
+Route::get('/test', function () {
+    return 'Laravel Railway berhasil!';
+});
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
